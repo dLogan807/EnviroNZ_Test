@@ -67,7 +67,7 @@ function App() {
     headers.set("Accept", "application/json");
 
     const request: RequestInfo = new Request(
-      `${BACKEND}/closestSuburb?latitude=${location.latitude}?longitude=${location.longitude}`,
+      `${BACKEND}/closestSuburb?latitude=${location.latitude}&longitude=${location.longitude}`,
       {
         method: "GET",
         headers: headers,
