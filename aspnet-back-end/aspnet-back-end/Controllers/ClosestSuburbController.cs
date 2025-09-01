@@ -32,7 +32,7 @@ namespace aspnet_back_end.Controllers
             {
                 return closestSuburb;
             }
-            //NMeed to check for NAN
+            //Need to check for NAN
             double latitudeNum = Double.Parse(latitude);
             double longitudeNum = Double.Parse(longitude);
 
@@ -40,31 +40,33 @@ namespace aspnet_back_end.Controllers
 
             foreach (Suburb suburb in suburbs)
             {
-                //double thisDistance = GetEuclideanDistance(
-                //    latitudeNum,
-                //    longitudeNum,
-                //    suburb.Latitude,
-                //    suburb.Longitude
-                //);
+                double thisDistance = GetEuclideanDistance(
+                    latitudeNum,
+                    longitudeNum,
+                    suburb.Latitude,
+                    suburb.Longitude
+                );
 
-                if (closestDistance == -1) //|| thisDistance < closestDistance
+                if (closestDistance == -1 || thisDistance < closestDistance)
                 {
                     closestSuburb = suburb;
+                    closestDistance = thisDistance;
                 }
             }
 
             return closestSuburb;
         }
 
-        //double GetEuclideanDistance(
-        //    double firstLatitude,
-        //    double firstLongitude,
-        //    double secondLatitude,
-        //    double secondLongitude
-        //) {
-        //    double deltaLat = lat2 - lat1;
-        //    double deltaLon = lon2 - lon1;
-        //
-        //}
+        static double GetEuclideanDistance(
+            double firstLatitude,
+            double firstLongitude,
+            double secondLatitude,
+            double secondLongitude
+        )
+        {
+            double deltaLat = secondLatitude - firstLatitude;
+            double deltaLon = secondLongitude - firstLongitude;
+            return Math.Sqrt(deltaLat * deltaLat + deltaLon * deltaLon);
+        }
     }
 }
